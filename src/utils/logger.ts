@@ -13,19 +13,19 @@ class Logger {
   }
 
   info(message: string): void {
-    console.log(`ℹ️  ${this.formatMessage(LogLevel.INFO, message)}`);
+    console.log(`${this.formatMessage(LogLevel.INFO, message)}`);
   }
 
   success(message: string): void {
-    console.log(`✅ ${this.formatMessage(LogLevel.SUCCESS, message)}`);
+    console.log(`${this.formatMessage(LogLevel.SUCCESS, message)}`);
   }
 
   warning(message: string): void {
-    console.warn(`⚠️  ${this.formatMessage(LogLevel.WARNING, message)}`);
+    console.warn(`${this.formatMessage(LogLevel.WARNING, message)}`);
   }
 
   error(message: string, error?: Error | unknown): void {
-    console.error(`❌ ${this.formatMessage(LogLevel.ERROR, message)}`);
+    console.error(`${this.formatMessage(LogLevel.ERROR, message)}`);
     if (error) {
       if (error instanceof Error) {
         console.error('Stack trace:', error.stack);
@@ -37,7 +37,7 @@ class Logger {
 
   debug(message: string, data?: any): void {
     if (process.env.NODE_ENV === 'development') {
-      console.log(`🐛 ${this.formatMessage(LogLevel.DEBUG, message)}`);
+      console.log(`${this.formatMessage(LogLevel.DEBUG, message)}`);
       if (data) {
         console.log('Debug data:', data);
       }
