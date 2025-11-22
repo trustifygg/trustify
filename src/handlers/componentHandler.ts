@@ -1,10 +1,15 @@
-import fs from 'fs';
-import path from 'path';
-import { Collection } from 'discord.js';
-import { ExtendedClient, ButtonComponent, SelectMenuComponent, ModalComponent } from '../types';
-import { logger } from '../utils/logger';
+import fs from "fs";
+import path from "path";
+import { Collection } from "discord.js";
+import {
+  ExtendedClient,
+  ButtonComponent,
+  SelectMenuComponent,
+  ModalComponent,
+} from "../types";
+import { logger } from "../utils/logger";
 
-type ComponentType = 'buttons' | 'selectMenus' | 'modals';
+type ComponentType = "buttons" | "selectMenus" | "modals";
 
 interface ComponentCollections {
   buttons: Collection<string, ButtonComponent>;
@@ -17,19 +22,19 @@ export function loadComponents(client: ExtendedClient): void {
     buttons: new Collection<string, ButtonComponent>(),
     selectMenus: new Collection<string, SelectMenuComponent>(),
     modals: new Collection<string, ModalComponent>(),
-  };
+  } as ComponentCollections;
 
-  loadComponentType(client, 'buttons', 'button');
+  loadComponentType(client, "buttons", "button");
 
-  loadComponentType(client, 'selectMenus', 'select menu');
+  loadComponentType(client, "selectMenus", "select menu");
 
-  loadComponentType(client, 'modals', 'modal');
+  loadComponentType(client, "modals", "modal");
 }
 
 function loadComponentType(
   client: ExtendedClient,
   type: ComponentType,
-  displayName: string
+  displayName: string,
 ): void {
   const componentsPath = path.join(__dirname, `../components/${type}`);
 
@@ -40,7 +45,7 @@ function loadComponentType(
 
   const componentFiles = fs
     .readdirSync(componentsPath)
-    .filter((file) => file.endsWith('.ts') || file.endsWith('.js'));
+    .filter((file) => file.endsWith(".ts") || file.endsWith(".js"));
 
   for (const file of componentFiles) {
     const filePath = path.join(componentsPath, file);
@@ -49,8 +54,10 @@ function loadComponentType(
       const component: ButtonComponent | SelectMenuComponent | ModalComponent =
         require(filePath).default || require(filePath);
 
-      if (!('customId' in component) || !('execute' in component)) {
-        logger.warning(`Component at ${filePath} is missing required "customId" or "execute" property`);
+      if (!("customId" in component) || !("execute" in component)) {
+        logger.warning(
+          `Component at ${filePath} is missing required "customId" or "execute" property`,
+        );
         continue;
       }
 
