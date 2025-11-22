@@ -1,0 +1,19 @@
+model Review {
+  reviewId         String @id
+  guildId          String 
+  guild            Guild   @relation(fields: [guildId], references: [guildId])
+
+  authorId         String
+  messageId        String? @unique 
+  threadId         String?
+  review           String
+  rating           Int 
+  anonymousReview  Boolean @default(false)
+  attachment       String?
+  useful           Json @default("{\"count\": 0, \"users\": []}")
+  createdAt        DateTime @default(now())
+  editedAt         DateTime?
+
+  @@map("Reviews")
+  @@index([reviewId, guildId])
+}

@@ -1,0 +1,11 @@
+model User {
+  userId      String @id
+  username    String
+  email       String @unique
+  avatar      String
+  votedAt     DateTime?
+  accessToken String
+  refreshToken String
+
+  @@map("users")
+}

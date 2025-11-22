@@ -1,14 +1,17 @@
-import { SlashCommandBuilder, ChatInputCommandInteraction } from 'discord.js';
-import { SlashCommand } from '../../types';
+import {
+  type ChatInputCommandInteraction,
+  SlashCommandBuilder,
+} from "discord.js";
+import type { SlashCommand } from "../types";
 
 const command: SlashCommand = {
   data: new SlashCommandBuilder()
-    .setName('ping')
-    .setDescription('Replies with Pong and bot latency!'),
+    .setName("ping")
+    .setDescription("Replies with Pong and bot latency!"),
 
   async execute(interaction: ChatInputCommandInteraction): Promise<void> {
     const sent = await interaction.reply({
-      content: 'Pinging...',
+      content: "Pinging...",
       fetchReply: true,
     });
 
@@ -17,8 +20,8 @@ const command: SlashCommand = {
 
     await interaction.editReply(
       `🏓 Pong!\n` +
-      `📡 Latency: ${latency}ms\n` +
-      `💓 API Latency: ${apiLatency}ms`
+        `📡 Latency: ${latency}ms\n` +
+        `💓 API Latency: ${apiLatency}ms`,
     );
   },
 };
