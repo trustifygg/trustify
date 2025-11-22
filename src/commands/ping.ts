@@ -3,11 +3,12 @@ import {
   SlashCommandBuilder,
 } from "discord.js";
 import type { SlashCommand } from "../types";
+import { createEmbed } from "../utils/embedBuilder";
 
 const command: SlashCommand = {
   data: new SlashCommandBuilder()
     .setName("ping")
-    .setDescription("Replies with Pong and bot latency!"),
+    .setDescription("Replies with Pong and bot latency"),
 
   async execute(interaction: ChatInputCommandInteraction): Promise<void> {
     const sent = await interaction.reply({
@@ -18,11 +19,15 @@ const command: SlashCommand = {
     const latency = sent.createdTimestamp - interaction.createdTimestamp;
     const apiLatency = Math.round(interaction.client.ws.ping);
 
-    await interaction.editReply(
-      `🏓 Pong!\n` +
-        `📡 Latency: ${latency}ms\n` +
-        `💓 API Latency: ${apiLatency}ms`,
-    );
+    const embed = createEmbed({
+      title: "🏓 Pong!",
+      fields: [
+        { name: "📡 Latency", value: `${latency}ms`, inline: true },
+        { name: "💓 API Latency", value: `${apiLatency}ms`, inline: true },
+      ],
+    });
+
+    await interaction.editReply({ content: "", embeds: [embed] });
   },
 };
 
