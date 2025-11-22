@@ -33,3 +33,4 @@ data/
 
 # Build files
 build/
+/db/generated/prisma
