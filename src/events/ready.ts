@@ -1,8 +1,8 @@
 import { Events, REST, Routes } from 'discord.js';
 import { config } from '../config';
-import { getSlashCommandsData } from '../handlers/slashCommandHandler';
+import { getSlashCommandsData } from '../handlers/commandHandler';
+import type { BotEvent, ExtendedClient } from '../types';
 import { logger } from '../utils/logger';
-import { ExtendedClient, BotEvent } from '../types';
 
 const event: BotEvent = {
   name: Events.ClientReady,
