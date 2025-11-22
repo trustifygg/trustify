@@ -15,7 +15,7 @@ model Guild {
   forceAnonymousReviews Boolean  @default(false)
   createThreads         Boolean  @default(true)
   reviewButton          Boolean  @default(true)
-  usefulButton          Boolean  @default(true)
+  upvoteButton          Boolean  @default(true)
   ratingEmoji           String   @default("⭐")
   reviewTitle           String   @default("New Review Submitted!")
   customReviewButton    Json?    @default("{\"label\": \"Write a Review\", \"style\": \"BLURPLE\", \"emoji\": \"✍️\"}")
