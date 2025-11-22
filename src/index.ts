@@ -34,8 +34,8 @@ async function startBot(): Promise<void> {
 }
 
 async function startApi(): Promise<void> {
-  logger.info("\n🌐 Starting API server...");
-  startApiServer(config.apiPort);
+  logger.info("\nStarting API server...");
+  startApiServer(config.port);
 }
 
 process.on("unhandledRejection", (error: Error) => {
