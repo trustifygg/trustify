@@ -1,4 +1,12 @@
-import { Client, Collection, ChatInputCommandInteraction, Message, ButtonInteraction, StringSelectMenuInteraction, ModalSubmitInteraction } from 'discord.js';
+import {
+  Client,
+  Collection,
+  ChatInputCommandInteraction,
+  Message,
+  ButtonInteraction,
+  StringSelectMenuInteraction,
+  ModalSubmitInteraction,
+} from "discord.js";
 
 export interface ExtendedClient extends Client {
   config: BotConfig;
@@ -17,7 +25,8 @@ export interface BotConfig {
   guildId?: string;
   prefix: string;
   mongodbUri: string;
-  environment: 'development' | 'production';
+  environment: "development" | "production";
+  apiPort: number;
 }
 
 export interface SlashCommand {

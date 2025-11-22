@@ -3,12 +3,11 @@ import { config } from "./config";
 import { loadCommands } from "./handlers/commandHandler";
 import { loadComponents } from "./handlers/componentHandler";
 import { loadEvents } from "./handlers/eventHandler";
+import { startApiServer } from "./handlers/apiHandler";
 import type { ExtendedClient } from "./types";
 import { logger } from "./utils/logger";
 
 async function startBot(): Promise<void> {
-  logger.info("🚀 Starting Discord Bot...");
-
   const client = new Client({
     intents: [
       GatewayIntentBits.Guilds,
@@ -34,6 +33,11 @@ async function startBot(): Promise<void> {
   }
 }
 
+async function startApi(): Promise<void> {
+  logger.info("\n🌐 Starting API server...");
+  startApiServer(config.apiPort);
+}
+
 process.on("unhandledRejection", (error: Error) => {
   logger.error("Unhandled promise rejection:", error);
 });
@@ -43,7 +47,7 @@ process.on("uncaughtException", (error: Error) => {
   process.exit(1);
 });
 
-startBot().catch((error) => {
-  logger.error("Failed to start bot:", error);
+Promise.all([startBot(), startApi()]).catch((error) => {
+  logger.error("Failed to start application:", error);
   process.exit(1);
 });

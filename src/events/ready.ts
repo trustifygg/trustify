@@ -13,8 +13,8 @@ const event: BotEvent = {
       return;
     }
 
-    logger.success(`🤖 Bot is ready! Logged in as ${client.user.tag}`);
-    logger.info(`📊 Serving ${client.guilds.cache.size} guild(s)`);
+    logger.success(`Bot is ready! Logged in as ${client.user.tag}`);
+    logger.info(`Serving ${client.guilds.cache.size} guild(s)`);
 
     await registerSlashCommands(client);
   },
@@ -31,7 +31,7 @@ async function registerSlashCommands(client: ExtendedClient): Promise<void> {
 
     const rest = new REST().setToken(config.token);
 
-    logger.info(`🔄 Started refreshing ${commands.length} application (/) commands.`);
+    logger.info(`Started refreshing ${commands.length} application (/) commands.`);
 
     if (config.guildId && config.environment === 'development') {
       const data = await rest.put(
